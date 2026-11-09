@@ -1,0 +1,14 @@
+### 1. Get All Doctors
+GET http://localhost:8081/api/doctors
+
+### 2. Get All Patients
+GET http://localhost:8081/api/patients
+
+### 3. Book Appointment
+POST http://localhost:8081/api/appointments/book?doctorId=1&patientId=1&dateTime=2026-12-01T10:00:00&reason=Checkup
+
+### 4. Get Doctor Appointments
+GET http://localhost:8081/api/appointments/doctor/1
+
+### 5. Cancel Appointment (Status Change)
+PUT http://localhost:8081/api/appointments/1/status?status=CANCELLED
