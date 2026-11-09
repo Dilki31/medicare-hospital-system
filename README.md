@@ -31,15 +31,14 @@ A production-ready **REST API** built with Spring Boot for managing hospital ope
 
 5. Access the API at http://localhost:8081/api/
 
-📂 Project Structure
-src/main/java/com/dilki/medicare/
-├── config/       # Security & Data Initialization
-├── controller/   # REST API Endpoints
-├── dto/          # Data Transfer Objects
-├── entity/       # Database Models (User, Doctor, Patient, Appointment)
-├── repository/   # Spring Data JPA Interfaces
-├── security/     # JWT Filter & Services
-└── service/      # Business Logic
+## 📂 Project Structure
+- `config/` - Security & Data Initialization
+- `controller/` - REST API Endpoints
+- `dto/` - Data Transfer Objects
+- `entity/` - Database Models (User, Doctor, Patient, Appointment)
+- `repository/` - Spring Data JPA Interfaces
+- `security/` - JWT Filter & Services
+- `service/` - Business Logic
 
 👨‍💻 Author
 Dilki Nanayakkara
