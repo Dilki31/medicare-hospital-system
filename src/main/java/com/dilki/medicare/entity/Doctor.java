@@ -1,9 +1,10 @@
 package com.dilki.medicare.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
 import java.math.BigDecimal;
 import java.util.List;
+import lombok.*;
 
 @Entity
 @Table(name = "doctors")
@@ -30,6 +31,7 @@ public class Doctor {
 
     private BigDecimal consultationFee;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 }

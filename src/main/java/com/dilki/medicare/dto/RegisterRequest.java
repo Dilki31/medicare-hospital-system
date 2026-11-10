@@ -1,11 +1,21 @@
 package com.dilki.medicare.dto;
-import com.dilki.medicare.entity.Role;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class RegisterRequest {
+
+    @NotBlank(message = "is required")
+    @Email(message = "must be a valid email address")
     private String email;
+
+    @NotBlank(message = "is required")
+    @Size(min = 8, message = "must be at least 8 characters")
     private String password;
+
+    @NotBlank(message = "is required")
     private String fullName;
-    private Role role;
 }
