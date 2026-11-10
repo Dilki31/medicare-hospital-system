@@ -1,4 +1,4 @@
-package com.diliki.medicare;
+package com.dilki.medicare;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

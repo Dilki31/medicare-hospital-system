@@ -1,4 +1,4 @@
-package com.diliki.medicare;
+package com.dilki.medicare;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

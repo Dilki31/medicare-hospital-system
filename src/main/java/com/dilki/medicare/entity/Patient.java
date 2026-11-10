@@ -1,9 +1,10 @@
 package com.dilki.medicare.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
+import lombok.*;
 
 @Entity
 @Table(name = "patients")
@@ -31,6 +32,7 @@ public class Patient {
 
     private String phone;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 }

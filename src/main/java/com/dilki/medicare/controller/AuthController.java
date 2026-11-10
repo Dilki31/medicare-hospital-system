@@ -6,6 +6,7 @@ import com.dilki.medicare.repository.*;
 import com.dilki.medicare.security.JwtService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,17 +34,12 @@ public class AuthController {
                 .email(req.getEmail())
                 .password(passwordEncoder.encode(req.getPassword()))
                 .fullName(req.getFullName())
-                .role(req.getRole() != null ? req.getRole() : Role.PATIENT)
+                .role(Role.PATIENT) // public sign-up can only create PATIENT accounts
                 .build();
         user = userRepository.save(user);
 
-        if (user.getRole() == Role.DOCTOR) {
-            Doctor doctor = Doctor.builder().user(user).specialization("General").build();
-            doctorRepository.save(doctor);
-        } else if (user.getRole() == Role.PATIENT) {
-            Patient patient = Patient.builder().user(user).build();
-            patientRepository.save(patient);
-        }
+        Patient patient = Patient.builder().user(user).build();
+        patientRepository.save(patient);
 
         String token = jwtService.generateToken(user);
         return ResponseEntity.ok(new AuthResponse(token, user.getRole().name(), user.getFullName()));
@@ -54,12 +50,12 @@ public class AuthController {
 
         var userOpt = userRepository.findByEmail(req.getEmail());
         if (userOpt.isEmpty()) {
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }
 
         User user = userOpt.get();
         if (!passwordEncoder.matches(req.getPassword(), user.getPassword())) {
-            return ResponseEntity.badRequest().body("Invalid password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }
 
         String token = jwtService.generateToken(user);

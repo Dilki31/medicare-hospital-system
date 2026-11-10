@@ -10,7 +10,8 @@ A production-ready **REST API** built with Spring Boot for managing hospital ope
 - **Maven** build system
 
 ## ✨ Key Features
-- 🔐 **JWT Authentication**: Secure login and registration with role-based access.
+- 🔐 **JWT Authentication**: Secure login and registration. Public sign-up creates PATIENT accounts only; other roles are seeded by the application.
+- 🛡️ **Role-based access**: Endpoints are restricted with `@PreAuthorize` (for example, only DOCTOR, RECEPTIONIST or ADMIN can update an appointment status).
 - 👨‍⚕️ **Doctor Management**: Admin can manage doctors, specializations, and consultation fees.
 - 🧑‍💼 **Patient Profiles**: Patients can view their medical details.
 - 📅 **Smart Appointment Booking**: Prevents double-booking (conflict detection) for doctors.
@@ -20,14 +21,14 @@ A production-ready **REST API** built with Spring Boot for managing hospital ope
 ## 🛠️ How to Run Locally
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Diliki31/medicare-hospital-system.git
+   git clone https://github.com/Dilki31/medicare-hospital-system.git
 
 2. Create a PostgreSQL database named medicare_db.
 
 3. Update src/main/resources/application.properties with your database credentials.
 
 4. Run the application:
-   ./mvnw spring-boot:
+   ./mvnw spring-boot:run
 
 5. Access the API at http://localhost:8081/api/
 
@@ -39,6 +40,23 @@ A production-ready **REST API** built with Spring Boot for managing hospital ope
 - `repository/` - Spring Data JPA Interfaces
 - `security/` - JWT Filter & Services
 - `service/` - Business Logic
+
+## ⚙️ Configuration
+Secrets are **not** stored in this repository. Set these environment variables before starting the app:
+
+| Variable | Description |
+|---|---|
+| `DB_PASSWORD` | Password of your local PostgreSQL user |
+| `JWT_SECRET` | Base64-encoded secret key, at least 256 bits (32 bytes) |
+
+Generate a key: `openssl rand -base64 32` (macOS/Linux/Git Bash).
+
+Run on Windows PowerShell:
+```powershell
+$env:DB_PASSWORD="your-db-password"
+$env:JWT_SECRET="your-generated-base64-key"
+./mvnw spring-boot:run
+```
 
 👨‍💻 Author
 Dilki Nanayakkara
